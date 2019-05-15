@@ -6,16 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<title>Login page</title>
+<title>page</title>
 </head>
 <body>
 <h1 class="text-center text-success">Create/Connect to a Bot</h1>
 <div>
 <form action="/connectToBot" method = "post">
 <div>
-<label for="name"> Enter the name of the bot you want to connect to (it'll be created if no such bot exists</label>
+<label for="name"> Enter the name of the bot you want to connect to (it'll be created if no such bot exists)</label>
 </div>
-<input type="text" id="name" required>
+<input type="text" id="name" name="name" required>
 <input type = "submit" class=" pt-2 btn btn-success btn-lg" value="log to bot">
 </div>
 </form>

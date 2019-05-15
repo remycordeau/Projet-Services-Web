@@ -11,7 +11,7 @@ class Bot{
     this.initBot();  
   }
 
-  get name(){
+  getName(){
     return this.name;
   }
 
@@ -36,4 +36,4 @@ class Bot{
   }
 }
 
-module.exports;
+module.exports = Bot;
