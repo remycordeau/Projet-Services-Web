@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html>
 <head>
 <!-- Required meta tags -->
@@ -9,15 +9,8 @@
 <title>Login page</title>
 </head>
 <body>
-<h1 class="text-center text-success">Create/Connect to a Bot</h1>
+<h1 class="text-center text-success">Connected to Bot <%= bot.name()%></h1>
+<div class="text-center pt-5">
 <div>
-<form action="/connectToBot" method = "post">
-<div>
-<label for="name"> Enter the name of the bot you want to connect to (it'll be created if no such bot exists</label>
-</div>
-<input type="text" id="name" required>
-<input type = "submit" class=" pt-2 btn btn-success btn-lg" value="log to bot">
-</div>
-</form>
 </body>
 </html>
