@@ -1,39 +1,39 @@
-// un bot est constitué d'un nom et d'un bot rivescript
 const RiveScript = require("rivescript");
+const Readline = require("readline");
 
-class Bot{ 
+const rl = Readline.createInterface({
+  input: process.stdin,
+  output: process.stdout
+});
 
-  constructor(name){
+class Bot{
 
-    this.name = name;
-    console.log(this.name);
+constructor(){
     this.bot = new RiveScript();
-    this.initBot();  
+    this.initBot();
   }
 
-  getName(){
-    return this.name;
+getBot(){
+    return this.bot;
   }
 
   initBot(){
-
-   this.bot.loadDirectory("brain")
-   .then(this.loading_done)
-   .catch(this.loading_error);
-
-   this.bot.loadFile(["brain/standard.rive"])
-   .then(this.loading_done)
-   .catch(this.loading_error);
+    this.bot.loadFile("./brain/standard.rive")
+    .then(this.load_successfull())
   }
 
-  loading_done(){
-	console.log("Bot has finished loading !");
-	this.bot.sortReplies();
+  load_successfull(){
+    console.log("Bot files loaded successfully !");
+    this.bot.sortReplies();
+    this.ask();
   }
 
-  loading_error(error,filename,lineno){
-	console.log("error when loading files :"+error);
+  ask(message){
+    this.bot.sortReplies();
+    this.bot.reply(message)
+    .then(console.log);
   }
+
+
 }
-
 module.exports = Bot;
