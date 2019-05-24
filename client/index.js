@@ -34,4 +34,10 @@ app.post('/AdminPage', function(req,res){
 
 app.post('/connectToBot', function(req,res){
     client.getBot(req.body.name);
+    res.render("connect",{botName: req.body.name, reply: ""})
+});
+
+app.post("/talk", function(req,res){
+  reply = client.getBotReply();
+  res.render("connect",{username: req.body.username,botName: req.body.name,reply: reply})
 });

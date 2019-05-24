@@ -1,6 +1,7 @@
 const RiveScript = require("rivescript");
 require("babel-polyfill");
 const express = require("express");
+const app = express();
 const bodyParser = require("body-parser");
 
 
@@ -32,13 +33,14 @@ class Bot{
   }
 
   error_handler (loadcount, err) {
-  	console.log("Error loading batch #" + loadcount + ": " + err + "\n");
+  	//console.log("Error loading batch #" + loadcount + ": " + err + "\n");
   }
 
 
   // POST to /reply to get bot's reply.
   getReply(req, res) {
   	// Get data from the JSON post.
+    console.log("test");
     var username = req.body.username;
   	var message  = req.body.message;
   	var vars = req.body.vars;

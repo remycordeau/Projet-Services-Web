@@ -1,11 +1,11 @@
-var XMLHttpRequest = require("./xmlhttprequest").XMLHttpRequest;
+var XMLHttpRequest = require("xmlhttprequest").XMLHttpRequest;
 var param = "";
 const getAllBotsURL="http://localhost:8081/";
 var getBotURL="http://localhost:8081/";
 const postBotURL="http://localhost:8081";
 const putBotURL="http://localhost:8081";
 const deleteBotURL="http://localhost:8081";
-const getBotReplyURL = "http://localhost:8080/reply"
+const getBotReplyURL = "http://localhost:8081/talk"
 const invocation = new XMLHttpRequest();
 
 
@@ -22,10 +22,12 @@ module.exports = {
  },
   getBot: function(botName){
       if(invocation){
+        var params = "bot="+botName;
+        console.log(params);
         console.log("URL : "+getBotURL);
         invocation.open('POST', getBotURL, true);
         //invocation.onreadystatechange = handler;
-        invocation.send(null);
+        invocation.send(params);
       } else{
         console.error("No Invocation TookPlace At All");
       }

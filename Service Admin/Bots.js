@@ -3,17 +3,23 @@ const Bot = require("./Bot.js");
 class Bots{
 
   constructor(){
-    this.bots = new Map();
+  this.bots = new Map();
   }
 
   get size(){
     return this.bots.size;
   }
 
+  getBotList(){
+    return this.bots;
+  }
+
   addBot(name){
 
-    let newBot = new Bot(name);
+    let newBot = new Bot();
     this.bots.set(name,newBot);
+    var iterator = this.bots.keys();
+    console.log("contains "+iterator.next().value);
     return this.getBot(name);
   }
 
