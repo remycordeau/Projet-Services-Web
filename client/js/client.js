@@ -1,8 +1,7 @@
-var XMLHttpRequest = require("XMLHttpRequest").XMLHttpRequest;
-var exports = module.exports;
+var XMLHttpRequest = require("./xmlhttprequest").XMLHttpRequest;
 var param = "";
 const getAllBotsURL="http://localhost:8081/";
-const getBotURL="http://localhost:8081?bot="+param;
+var getBotURL="http://localhost:8081/";
 const postBotURL="http://localhost:8081";
 const putBotURL="http://localhost:8081";
 const deleteBotURL="http://localhost:8081";
@@ -10,24 +9,25 @@ const getBotReplyURL = "http://localhost:8080/reply"
 const invocation = new XMLHttpRequest();
 
 
-exports.getBotReply = function(){
-  if(invocation){
-    invocation.open('POST', getBotReplyURL, true);
-    //invocation.onreadystatechange = handler;
-    invocation.send(null);
-  }else{
-    console.error("No Invocation TookPlace At All");
-  }
+module.exports = {
 
-  exports.getBot = function(botName){
+ getBotReply: function(){
+    if(invocation){
+      invocation.open('POST', getBotReplyURL, true);
+      //invocation.onreadystatechange = handler;
+      invocation.send(null);
+    }else{
+      console.error("No Invocation TookPlace At All");
+    }
+ },
+  getBot: function(botName){
       if(invocation){
-        param = botName;
+        console.log("URL : "+getBotURL);
         invocation.open('POST', getBotURL, true);
         //invocation.onreadystatechange = handler;
         invocation.send(null);
-        param = "";
       } else{
         console.error("No Invocation TookPlace At All");
       }
   }
-}
+};
