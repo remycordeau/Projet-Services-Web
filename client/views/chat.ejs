@@ -6,23 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<title>Login page</title>
+<title>Chat</title>
 </head>
 <body>
-<h1 class="text-center text-success">Login to ChatBot Administration</h1>
+<h1 class="text-center text-success">Connected to Bot <%= botName%> </h1>
 <div class="text-center pt-5">
+<p><%= reply %></p>
+<form action ="/talk" method = "post">
 <div>
-<form action ="/AdminPage" method = "post"> 
-<div>
-<label for="name">Enter your id : </label>
-<input type="text" name="name" id="name" required>
+<label for="message">Enter your message : </label>
+<input type="text" name="message" id="message" required>
 </div>
 <div>
-<input type = "submit" class=" pt-2 btn btn-success btn-lg" value = "Log in">
+<input type = "submit" class=" pt-2 btn btn-success btn-lg" value = "Submit message to bot">
 </div>
+<input type = "hidden" id = "name" name = "name" value = "<%= botName %>">
 </form>
-</div>
-</div>
-<div class="pt-5 text-center small">Web site developped by Rémy Cordeau and Joachim Otto</div>
 </body>
 </html>

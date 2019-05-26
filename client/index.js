@@ -15,8 +15,7 @@ const server = app.listen(3000, () => { //run server
 //////////////// ROUTES /////////////////////
 
 app.get('/', function(req, res){
-  req.body.error = "";
-  res.render("login",{error: req.body.error});
+  res.render("login");
 });
 
 app.get('/disconnect', function(req,res){
@@ -34,10 +33,25 @@ app.post('/AdminPage', function(req,res){
 
 app.post('/connectToBot', function(req,res){
     client.getBot(req.body.name);
-    res.render("connect",{botName: req.body.name, reply: ""})
+    res.render("chat",{botName: req.body.name, reply: ""});
 });
 
+app.post("/createBot", function(req,res){
+  client.newBot(botName);
+  res.render("chat",{botName: req.body.name, reply: ""});
+});
+
+app.get("/deleteBot",function(req,res){
+  res.render("delete");
+});
+
+app.post("/delete",function(req,res){
+  client.deleteBot(req.body.name);
+  res.render("delete");
+})
+
 app.post("/talk", function(req,res){
-  reply = client.getBotReply();
-  res.render("connect",{username: req.body.username,botName: req.body.name,reply: reply})
+  client.getBotReply(req.body.name);
+  //console.log("bot Reply"+res.json.reply);
+  res.render("connect",{botName: req.body.name, reply:""});
 });

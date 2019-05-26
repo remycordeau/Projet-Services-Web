@@ -8,19 +8,25 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>Bot Administration</title>
 </head>
+<body>
 <h1 class="text-center text-primary">Welcome, <%= username %></h1>
 <div class="pt-5 text-center">
-<form action = "/create" method = "get">  <!-- Form to choose the games -->
-  <input type = "submit" class=" btn btn-info btn-lg" value = "Create bot">
+<form action = "/connectToBot" method = "post">  <!-- Form to choose the games -->
+  <input type = "submit" class=" btn btn-info btn-lg" value = "Connect to a bot">
 </form>
 </div>
 <div class="pt-5 text-center">
-<form action = "/gameNotAvailable" method = "post">
-  <input type = "submit" class="btn btn-info btn-lg" value = "Modify bot">
+<form action = "/create" method = "get">
+  <input type = "submit" class="btn btn-info btn-lg" value = "Create a bot">
 </form>
 </div>
 <div class="pt-5 text-center">
-<form action = "/gameNotAvailable" method = "post">
+<form action = "/deleteBot" method = "get">
+  <input type = "submit" class="btn btn-info btn-lg" value = "Delete a bot">
+</form>
+</div>
+<div class="pt-5 text-center">
+<form action = "/ModifyBot" method = "post">
   <input type = "submit" class="btn btn-info btn-lg" id = "name" value = "Modify bot personnality">
 </form>
 </div>
