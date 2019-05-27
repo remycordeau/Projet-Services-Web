@@ -28,7 +28,7 @@ app.get('/create',function(req,res){
 
 app.post('/AdminPage', function(req,res){
   login = req.body.name;
-  res.render('Administration',{username: login});
+  client.getAllBots(req,res);
 });
 
 app.post('/connectToBot', function(req,res){
@@ -37,8 +37,8 @@ app.post('/connectToBot', function(req,res){
 });
 
 app.post("/createBot", function(req,res){
-  client.newBot(botName);
-  res.render("chat",{botName: req.body.name, reply: ""});
+  botName = req.body.name;
+  client.newBot(botName,req,res);
 });
 
 app.get("/deleteBot",function(req,res){
@@ -46,12 +46,5 @@ app.get("/deleteBot",function(req,res){
 });
 
 app.post("/delete",function(req,res){
-  client.deleteBot(req.body.name);
-  res.render("delete");
+  client.deleteBot(req.body.name,req,res);
 })
-
-app.post("/talk", function(req,res){
-  client.getBotReply(req.body.name);
-  //console.log("bot Reply"+res.json.reply);
-  res.render("connect",{botName: req.body.name, reply:""});
-});

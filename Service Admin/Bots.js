@@ -16,7 +16,7 @@ class Bots{
 
   addBot(name){
 
-    let newBot = new Bot();
+    let newBot = new Bot(8080);
     this.bots.set(name,newBot);
     var iterator = this.bots.keys();
     console.log("contains "+iterator.next().value);

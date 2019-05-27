@@ -6,19 +6,22 @@ const bodyParser = require("body-parser");
 
 class Bot{
 
-  constructor(){
+  constructor(port){
     this.bot = new RiveScript();
+    this.port = port;
+    this.app = express();
     this.bot.loadDirectory("./brain").then(this.success_handler).catch(this.error_handler);
-  }
-
-
-  getResponse(){
-      return this.response;
   }
 
   success_handler() {
   	console.log("Brain successfully loaded!");
   	this.bot.sortReplies();
+    this.server = this.app.listen(8080, () => { //run server
+      console.log(`Bot is running on port ${server.address().port}`);
+    });
+    this.app.get("/", function(req,res){
+      res.render("login");
+    });
   }
 
   error_handler (loadcount, err) {
@@ -30,8 +33,7 @@ class Bot{
   	this.bot.reply(req.body.username,req.body.message).then(function(reply) {
         console.log(reply);
         let botResponse = {"reply": reply};
-        res.setHeader('Content-Type', 'application/json');
-        res.json(botResponse);
+        res.render("chat",{reply: botResponse});
       });
 }
 
