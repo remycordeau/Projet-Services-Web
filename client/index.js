@@ -14,21 +14,24 @@ const server = app.listen(3000, () => { //run server
 
 //////////////// ROUTES /////////////////////
 
+//login page
 app.get('/', function(req, res){
   res.render("login");
+});
+
+//admin page
+app.post('/AdminPage', function(req,res){
+  username = req.body.username;
+  client.getAllBots(username,req,res);
 });
 
 app.get('/disconnect', function(req,res){
   res.render('login');
 });
 
+//create page
 app.get('/create',function(req,res){
   res.render('create');
-});
-
-app.post('/AdminPage', function(req,res){
-  login = req.body.name;
-  client.getAllBots(req,res);
 });
 
 app.post("/createBot", function(req,res){
@@ -37,10 +40,21 @@ app.post("/createBot", function(req,res){
   client.newBot(botName,botPort,req,res);
 });
 
+//delete page
 app.get("/deleteBot",function(req,res){
   res.render("delete");
 });
 
 app.post("/delete",function(req,res){
   client.deleteBot(req.body.name,req,res);
-})
+});
+
+//information page
+app.get("/info", function(req,res){
+  res.render("information",{username: req.body.username})
+});
+
+app.post("/botInfo",function(req,res){
+  username = req.body.username;
+  client.getBot(username,req.body.name,req,res);
+});

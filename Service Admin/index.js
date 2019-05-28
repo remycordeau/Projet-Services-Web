@@ -24,7 +24,6 @@ const server = app.listen(8081, () => { //run server
 ////////////////////////////ROUTES////////////////////////////////
 
 app.get("/",cors(corsOptions),function(req,res){
-
   let allPorts = bots.getAllPorts();
   res.send({botNames: [...bots.getBotList().keys()],ports: allPorts}); //parsing map into array to allow it to be send as a json
 });
@@ -46,8 +45,11 @@ app.post("/delete/:botName",cors(corsOptions),function(req,res){
   }
 });
 
-app.post('/:botName',cors(corsOptions),function(req,res){
-  if(!bots.getBotList().has(req.params.botName)){
+app.get('/:botName',cors(corsOptions),function(req,res){
+  if(bots.getBotList().has(req.params.botName)){ // if bot exists
+    let bot = bots.getBot(req.params.botName);
+    res.send({botName: req.params.botName, port: bot.getPort()});
+  }else{
     /*message = "Bot does not exist";
     res.render("error",{message: message});*/
   }

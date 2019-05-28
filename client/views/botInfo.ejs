@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+<!-- Required meta tags -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<title>Bot information</title>
+</head>
+<body>
+<% console.log("information" + botInfo) %>
+<h1 class="text-center text-success">Information about bot <% botInfo.botName %></h1>
+<div>
+<ul>
+<li>Name : <% botInfo.botName %></li>
+<li>Running on port : <% botInfo.port %></li>
+<li>Status : </li>
+<li>Brain : </li>
+</ul>
+</div>
+<div>
+<form action = "/AdminPage" method = "post">
+<input type = "submit" class=" pt-2 btn btn-success btn-lg" value="Back to Bot Administration Menu">
+</form>
+</div>
+</body>
+</html>

@@ -30,25 +30,27 @@ module.exports = {
     }
   },
 
- getAllBots: function(req,res){
+ getAllBots: function(username,req,res){
    request = new XMLHttpRequest();
    if(request){
      request.open("GET",serviceURL,true);
      request.onreadystatechange = handler;
      request.send(null);
      var botList = serviceResponse;
-     res.render('Administration',{username: login,botList: botList});
+     res.render('Administration',{username: username,botList: botList});
    } else{
      console.error("Error during XMLHttpRequest");
    }
  },
 
-  getBot: function(botName){
+  getBot: function(username,botName,req,res){
     request = new XMLHttpRequest();
     if(request){
-        request.open('POST', serviceURL+`${botName}`, true);
+        request.open('GET', serviceURL+'/'+`${botName}`, true);
         request.onreadystatechange = handler;
         request.send(null);
+        var botInfo = serviceResponse;
+        res.render("botInfo",{username: username, botInfo: botInfo});
     }else{
         console.error("Error during XMLHttpRequest");
     }
