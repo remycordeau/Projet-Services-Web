@@ -38,6 +38,10 @@ class Bot{
   	//console.log("Error loading batch #" + loadcount + ": " + err + "\n");
   }
 
+  getPort(){
+    return this.port;
+  }
+
   getReply(req,res) {
     this.bot.sortReplies();
   	this.bot.reply(req.body.username,req.body.message).then(function(reply) {

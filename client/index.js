@@ -31,11 +31,6 @@ app.post('/AdminPage', function(req,res){
   client.getAllBots(req,res);
 });
 
-app.post('/connectToBot', function(req,res){
-    client.getBot(req.body.name);
-    res.render("chat",{botName: req.body.name, reply: ""});
-});
-
 app.post("/createBot", function(req,res){
   botName = req.body.name;
   botPort = req.body.port;

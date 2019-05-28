@@ -62,6 +62,14 @@ class Bots{
     return tabBots;
   }
 
+  getAllPorts(){
+    let allPorts = [];
+    for (const v of this.bots.values()) {
+      allPorts.push(v.getPort());
+    }
+    return allPorts;
+  }
+
   deleteBots(){
     this.bots.clear();
   }

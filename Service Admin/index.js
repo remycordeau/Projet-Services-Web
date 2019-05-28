@@ -24,7 +24,9 @@ const server = app.listen(8081, () => { //run server
 ////////////////////////////ROUTES////////////////////////////////
 
 app.get("/",cors(corsOptions),function(req,res){
-  res.send({botNames: [...bots.getBotList().keys()]}); //parsing map into array to allow it to be send as a json
+
+  let allPorts = bots.getAllPorts();
+  res.send({botNames: [...bots.getBotList().keys()],ports: allPorts}); //parsing map into array to allow it to be send as a json
 });
 
 app.post("/newBot/:botName/on/:botPort",cors(corsOptions),function(req,res){
