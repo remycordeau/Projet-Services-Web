@@ -5,10 +5,10 @@ var serviceResponse;
 
 module.exports = {
 
-  newBot: function(botName,req,res){
+  newBot: function(botName,botPort,req,res){
     request = new XMLHttpRequest();
     if(request){
-      request.open("POST",serviceURL+'/newBot/'+`${botName}`, true);
+      request.open("POST",serviceURL+'/newBot/'+`${botName}`+'/on/'+`${botPort}`, true);
       request.onreadystatechange = handler;
       request.send(null);
       res.render("create");

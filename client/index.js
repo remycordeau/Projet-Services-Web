@@ -38,7 +38,8 @@ app.post('/connectToBot', function(req,res){
 
 app.post("/createBot", function(req,res){
   botName = req.body.name;
-  client.newBot(botName,req,res);
+  botPort = req.body.port;
+  client.newBot(botName,botPort,req,res);
 });
 
 app.get("/deleteBot",function(req,res){

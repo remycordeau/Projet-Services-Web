@@ -27,9 +27,9 @@ app.get("/",cors(corsOptions),function(req,res){
   res.send({botNames: [...bots.getBotList().keys()]}); //parsing map into array to allow it to be send as a json
 });
 
-app.post("/newBot/:botName",cors(corsOptions),function(req,res){
+app.post("/newBot/:botName/on/:botPort",cors(corsOptions),function(req,res){
   if(!bots.getBotList().has(req.params.botName)){
-    bots.addBot(req.params.botName);
+    bots.addBot(req.params.botName,req.params.botPort);
   }else{
     res.send("Bot already exists");
   }

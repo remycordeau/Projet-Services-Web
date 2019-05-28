@@ -14,13 +14,11 @@ class Bots{
     return this.bots;
   }
 
-  addBot(name){
-
-    let newBot = new Bot(8080);
+  addBot(name,port){
+    let newBot = new Bot(port);
     this.bots.set(name,newBot);
     var iterator = this.bots.keys();
     console.log("contains "+iterator.next().value);
-    return this.getBot(name);
   }
 
   getBot(name){
