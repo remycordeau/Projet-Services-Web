@@ -9,7 +9,7 @@ class Bot{
     this.port = port;
     this.app = express();
     this.reply = "";
-    this.bot.loadDirectory("brain").then(this.defineRoutes.bind(this.)).catch(this.error_handler);
+    this.bot.loadDirectory("brain").then(this.defineRoutes.bind(this)).catch(this.error_handler);
   }
 
   defineRoutes(){
