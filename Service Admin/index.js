@@ -41,7 +41,7 @@ app.post("/delete/:botName",cors(corsOptions),function(req,res){
     bots.deleteBot(req.params.botName);
   } else{
     /*message = "Bot you want to delete does not exists";
-    res.render("error",{message: message});*/
+    res.send(message)*/
   }
 });
 

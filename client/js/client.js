@@ -34,11 +34,17 @@ module.exports = {
    request = new XMLHttpRequest();
    if(request){
      request.open("GET",serviceURL,true);
-     request.onreadystatechange = handler;
+     request.onreadystatechange = function() {
+	if (request.readyState == 4 && request.status == 200){
+		serviceResponse = JSON.parse(request.responseText);
+		console.log(serviceResponse);
+		responseAllBots(username,serviceResponse,req,res);
+	}else{
+     	 console.error("request Errors Occured " + request.readyState + " and the status is " + request.status);
+      }
+     };
      request.send(null);
-     var botList = serviceResponse;
-     res.render('Administration',{username: username,botList: botList});
-   } else{
+    }else{
      console.error("Error during XMLHttpRequest");
    }
  },
@@ -47,15 +53,30 @@ module.exports = {
     request = new XMLHttpRequest();
     if(request){
         request.open('GET', serviceURL+'/'+`${botName}`, true);
-        request.onreadystatechange = handler;
-        request.send(null);
-        var botInfo = serviceResponse;
-        res.render("botInfo",{username: username, botInfo: botInfo});
+        request.onreadystatechange = function() {
+	if (request.readyState == 4 && request.status == 200){
+		serviceResponse = JSON.parse(request.responseText);
+		console.log(serviceResponse);
+		responseBotInfo(username,serviceResponse,req,res);
+	}else{
+     	 console.error("request Errors Occured " + request.readyState + " and the status is " + request.status);
+      }
+     };
+     request.send(null);
     }else{
         console.error("Error during XMLHttpRequest");
     }
   }
 };
+
+function responseAllBots(username,serviceResponse,req,res){
+  res.render('Administration',{username: username,botList: serviceResponse});
+}
+
+
+function responseBotInfo(username,serviceResponse,req,res){
+  res.render('botInfo',{username: username,botInfo: serviceResponse});
+}
 
 function handler(evtXHR){
   if (request.readyState == 4){

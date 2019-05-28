@@ -9,12 +9,12 @@
 <title>Bot information</title>
 </head>
 <body>
-<% console.log("information" + botInfo) %>
-<h1 class="text-center text-success">Information about bot <% botInfo.botName %></h1>
+<% console.log("information" + botInfo.botName) %>
+<h1 class="text-center text-success">Information about bot <%= botInfo.botName %></h1>
 <div>
 <ul>
-<li>Name : <% botInfo.botName %></li>
-<li>Running on port : <% botInfo.port %></li>
+<li>Name : <%= botInfo.botName %></li>
+<li>Running on port : <%= botInfo.port %></li>
 <li>Status : </li>
 <li>Brain : </li>
 </ul>
