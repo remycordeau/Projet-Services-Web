@@ -4,13 +4,12 @@ class Bot{
     
     const express = require("express");
     const RiveScript = require("rivescript");
-    require("babel-polyfill");
     const bodyParser = require("body-parser");
     this.bot = new RiveScript();
     this.port = port;
     this.app = express();
     this.reply = "";
-    this.bot.loadDirectory("brain").then(this.defineRoutes).catch(this.error_handler);
+    this.bot.loadDirectory("brain").then(this.defineRoutes.bind(this.)).catch(this.error_handler);
   }
 
   defineRoutes(){
