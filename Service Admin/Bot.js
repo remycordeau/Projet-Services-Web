@@ -35,16 +35,15 @@ class Bot{
     });
     
     
-    BotInstance.app.get("/talk",function(req,res){
+    BotInstance.app.post("/connect",function(req,res){
       let username = req.body.username;
       if(!BotInstance.discussions.has(username)){
       	BotInstance.discussions.set(username,[]);
-	  }
+	}
       res.render("chat",{bot: BotInstance, username: username});
     });
 
    BotInstance.app.post("/talk",function(req,res){
-      console.log("username is : "+req.body.username);
       BotInstance.getReply(BotInstance,BotInstance.bot,BotInstance.port,req,res);
     });
 
@@ -60,12 +59,11 @@ class Bot{
 
   getReply(BotInstance,bot,port,req,res) {
     bot.sortReplies();
-    console.log("username is : "+req.body.username);
     BotInstance.getDiscussion(req.body.username).push(req.body.message);
-  	bot.reply(req.body.username,req.body.message).then(function(reply) {
-        console.log(reply);
-        BotInstance.getDiscussion(req.body.username).push(reply);
-        res.render("chat",{bot: BotInstance, username: req.body.username});
+    bot.reply(req.body.username,req.body.message).then(function(reply) {
+    //console.log(reply);
+    BotInstance.getDiscussion(req.body.username).push(reply);
+    res.render("chat",{bot: BotInstance, username: req.body.username});
    });
 }
 
