@@ -9,15 +9,27 @@
 <title>Chat</title>
 </head>
 <body>
-<h1 class="text-center text-success">Connected to Bot on port <%= port%> </h1>
+<h1 class="text-center text-success">Connected to Bot on port <%= bot.getPort()%> </h1>
 <div class="text-center pt-5">
-<p><%= reply %></p>
-<form action ="/" method = "post">
+<% 
+  let discussion = bot.getDiscussion(username);
+   
+  for (i = 0; i < discussion.length; i++) { 
+      if (i%2==0){ 
+      %>
+      	<div><p> <%= username + " : " + discussion[i] %></p></div>
+ 	  <% 
+ 	  } else { %>
+      	<div><p> bot : <%= discussion[i] %></p></div>
+   	  <% }
+  }%>
+<form action ="/talk" method = "post">
 <div>
 <label for="message">Enter your message : </label>
 <input type="text" name="message" id="message" required>
 </div>
 <div>
+<input type="hidden" name="username" id="username" value="<%= username %>">
 <input type = "submit" class=" pt-2 btn btn-success btn-lg" value = "Submit message to bot">
 </div>
 </form>

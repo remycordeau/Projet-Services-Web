@@ -36,23 +36,6 @@ class Bots{
     }
   }
 
-  /*updateTodo(updatedTodo){
-
-    const hasTodo = this.todos.has(updatedTodo.id);
-
-    if(hasTodo){
-
-      this.todos.set(updatedTodo.id,updatedTodo);
-
-      return updatedTodo;
-
-    } else {
-
-      return undefined;
-
-    }
- }*/
-
   getAllBots(){
 
     let tabBots = [];
