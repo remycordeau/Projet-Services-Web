@@ -10,22 +10,24 @@
 </head>
 <body>
 <h1 class="text-center text-success">Create a Bot</h1>
-<div>
+<div class = "pt-5 text-center">
 <form action="/createBot" method = "post">
-<div>
-<label for="name"> Enter Bot name</label>
-</div>
+<div class = "pt-2 text-center">
+<label for="name"> Enter Bot name : </label>
 <input type="text" id="name" name="name" required>
-<div>
-<label for="port"> Enter Bot port</label>
 </div>
+<div class = "pt-2 text-center">
+<label for="port"> Enter Bot port :</label>
 <input type="text" id="port" name="port" required>
+</div>
+<div class = "pt-2 text-center">
 <input type = "submit" class=" pt-2 btn btn-success btn-lg" value="Create bot">
 </div>
+</div>
 </form>
-<div>
+<div class = "pt-5 text-center">
 <form action = "/AdminPage" method = "post">
-<input type = "submit" class=" pt-2 btn btn-success btn-lg" value="Back to Bot Administration Menu">
+<input type = "submit" class=" pt-2 btn btn-warning btn-lg" value="Back to Bot Administration Menu">
 </form>
 </div>
 </body>
