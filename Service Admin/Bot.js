@@ -4,40 +4,39 @@ class Bot{
     
     const express = require("express");
     const RiveScript = require("rivescript");
-    const bodyParser = require("body-parser");
     this.bot = new RiveScript();
     this.port = port;
     this.app = express();
     this.reply = "";
-    this.bot.loadDirectory("brain").then(this.defineRoutes.bind(this)).catch(this.error_handler);
+    this.bot.loadDirectory("brain").then(this.initService.bind(this)).catch(this.error_handler);
   }
 
-  defineRoutes(){
-    console.log("testRoutesinter");
+
+  initService(){
+
+    const bodyParser = require("body-parser");
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.set('view engine', 'ejs');
-
-    this.app.get("/",function(req,res){
-      console.log("bot status" + this.bot);
-      res.render("chat",{bot: this.bot, reply: ""});
-    });
-
-    this.app.post("/",function(req,res){
-      this.getReply(req,res);
-    });
 
     console.log("Brain successfully loaded!");
     this.app.listen(this.port, () => { //run server for bot
       console.log(`Bot is running on port ${this.port}`);
     });
-  }
+    this.defineRoutes(this);
+}
 
-  success_handler() {
-  	console.log("Brain successfully loaded!");
-	console.log("test");
-	this.defineRoutes();  	
-        console.log("testRoutesexter");
-  }
+
+  defineRoutes(BotInstance){
+
+    BotInstance.app.get("/",function(req,res){
+      res.render("chat",{port: BotInstance.port, reply: ""});
+    });
+
+   BotInstance.app.post("/",function(req,res){
+      BotInstance.getReply(BotInstance.bot,BotInstance.port,req,res);
+    });
+
+}
 
   error_handler (loadcount, err) {
   	console.log("Error loading batch #" + loadcount + ": " + err + "\n");
@@ -47,11 +46,11 @@ class Bot{
     return this.port;
   }
 
-  getReply(req,res) {
-    this.bot.sortReplies();
-  	this.bot.reply(req.body.username,req.body.message).then(function(reply) {
+  getReply(bot,port,req,res) {
+    bot.sortReplies();
+  	bot.reply(req.body.username,req.body.message).then(function(reply) {
         console.log(reply);
-        res.render("chat",{bot: this.bot, reply: reply});
+        res.render("chat",{port: port, reply: reply});
    });
 }
 

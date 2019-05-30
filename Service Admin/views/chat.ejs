@@ -9,10 +9,10 @@
 <title>Chat</title>
 </head>
 <body>
-<h1 class="text-center text-success">Connected to Bot on port <%= bot.getPort()%> </h1>
+<h1 class="text-center text-success">Connected to Bot on port <%= port%> </h1>
 <div class="text-center pt-5">
 <p><%= reply %></p>
-<form action ="/talk" method = "post">
+<form action ="/" method = "post">
 <div>
 <label for="message">Enter your message : </label>
 <input type="text" name="message" id="message" required>
@@ -20,7 +20,6 @@
 <div>
 <input type = "submit" class=" pt-2 btn btn-success btn-lg" value = "Submit message to bot">
 </div>
-<input type = "hidden" id = "name" name = "name" value = "<%= botName %>">
 </form>
 </body>
 </html>
