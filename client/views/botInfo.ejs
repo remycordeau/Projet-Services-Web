@@ -11,7 +11,7 @@
 <body>
 <% console.log("information" + botInfo.botName) %>
 <h1 class="text-center text-success">Information about bot <%= botInfo.botName %></h1>
-<div>
+<div class= "pt-5 text-center">
 <ul>
 <li>Name : <%= botInfo.botName %></li>
 <li>Running on port : <%= botInfo.port %></li>
@@ -19,9 +19,9 @@
 <li>Brain : </li>
 </ul>
 </div>
-<div>
+<div class = "pt-5 text-center">
 <form action = "/AdminPage" method = "post">
-<input type = "submit" class=" pt-2 btn btn-success btn-lg" value="Back to Bot Administration Menu">
+<input type = "submit" class=" pt-2 btn btn-warning btn-lg" value="Back to Bot Administration Menu">
 </form>
 </div>
 </body>
