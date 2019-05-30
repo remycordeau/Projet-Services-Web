@@ -32,7 +32,7 @@ app.post("/newBot/:botName/on/:botPort",cors(corsOptions),function(req,res){
   if(!bots.getBotList().has(req.params.botName)){
     bots.addBot(req.params.botName,req.params.botPort);
   }else{
-    res.send("Bot already exists");
+    res.send("Error : Bot already exists");
   }
 });
 
@@ -40,8 +40,7 @@ app.post("/delete/:botName",cors(corsOptions),function(req,res){
   if(bots.getBotList().has(req.params.botName)){
     bots.deleteBot(req.params.botName);
   } else{
-    /*message = "Bot you want to delete does not exists";
-    res.send(message)*/
+    res.send("Error : bot doesn't exist");
   }
 });
 
@@ -50,7 +49,6 @@ app.get('/:botName',cors(corsOptions),function(req,res){
     let bot = bots.getBot(req.params.botName);
     res.send({botName: req.params.botName, port: bot.getPort()});
   }else{
-    /*message = "Bot does not exist";
-    res.render("error",{message: message});*/
+    res.send("Error : bot doesn't exist");
   }
 });
