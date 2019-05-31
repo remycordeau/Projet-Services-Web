@@ -6,9 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <!-- Bootstrap CSS -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<title>Bot Administration</title>
+<title>Error</title>
 </head>
 <body>
-<h1 class="text-center text-primary">Error, <%= message%></h1>
+<div class = "pt-5 text-center">
+<h1 class="text-center text-primary text-danger">Error : <%= message%></h1>
+</div>
+<div class="pt-5 text-center">
+  <form action="/AdminPage" method="post">
+    <input type = "submit" class=" pt-2 btn btn-warning btn-lg" value="Back to Bot Administration Menu">
+    <input type="hidden" id="username" name="username" value = "<%= username %>">
+  </form>
+</div>
 </body>
 </html>

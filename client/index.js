@@ -31,7 +31,6 @@ app.get('/disconnect', function(req,res){
 
 //create page
 app.post('/create',function(req,res){
-  console.log("create page" + req.body.username);
   res.render('create',{username: req.body.username});
 });
 
@@ -39,7 +38,6 @@ app.post("/createBot", function(req,res){
   botName = req.body.name;
   botPort = req.body.port;
   username = req.body.name;
-  console.log("post createBot : "+ username);
   client.newBot(username,botName,botPort,req,res);
 });
 
