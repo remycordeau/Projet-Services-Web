@@ -30,27 +30,31 @@ app.get('/disconnect', function(req,res){
 });
 
 //create page
-app.get('/create',function(req,res){
-  res.render('create');
+app.post('/create',function(req,res){
+  console.log("create page" + req.body.username);
+  res.render('create',{username: req.body.username});
 });
 
 app.post("/createBot", function(req,res){
   botName = req.body.name;
   botPort = req.body.port;
-  client.newBot(botName,botPort,req,res);
+  username = req.body.name;
+  console.log("post createBot : "+ username);
+  client.newBot(username,botName,botPort,req,res);
 });
 
 //delete page
-app.get("/deleteBot",function(req,res){
-  res.render("delete");
+app.post("/deleteBot",function(req,res){
+  res.render("delete",{username: req.body.username});
 });
 
 app.post("/delete",function(req,res){
-  client.deleteBot(req.body.name,req,res);
+  username = req.body.name;
+  client.deleteBot(username,req.body.name,req,res);
 });
 
 //information page
-app.get("/info", function(req,res){
+app.post("/info", function(req,res){
   res.render("information",{username: req.body.username})
 });
 

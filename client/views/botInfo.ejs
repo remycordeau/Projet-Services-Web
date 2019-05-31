@@ -12,16 +12,15 @@
 <% console.log("information" + botInfo.botName) %>
 <h1 class="text-center text-success">Information about bot <%= botInfo.botName %></h1>
 <div class= "pt-5 text-center">
-<ul>
-<li>Name : <%= botInfo.botName %></li>
-<li>Running on port : <%= botInfo.port %></li>
-<li>Status : </li>
-<li>Brain : </li>
-</ul>
+<h2>Name : <%= botInfo.botName %></h2>
+<h2>Running on port : <%= botInfo.port %></h2>
+<h2>Status : </h2>
+<h2>Brain : </h2>
 </div>
 <div class = "pt-5 text-center">
 <form action = "/AdminPage" method = "post">
 <input type = "submit" class=" pt-2 btn btn-warning btn-lg" value="Back to Bot Administration Menu">
+<input type="hidden" id="username" name="username" value = "<%= username %>">
 </form>
 </div>
 </body>

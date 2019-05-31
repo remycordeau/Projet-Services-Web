@@ -1,7 +1,7 @@
 class Bot{
 
   constructor(port){
-    
+
     const express = require("express");
     const RiveScript = require("rivescript");
     this.bot = new RiveScript();
@@ -24,7 +24,7 @@ class Bot{
       console.log(`Bot is running on port ${this.port}`);
     });
     this.defineRoutes(this);
-    
+
 }
 
 
@@ -33,8 +33,8 @@ class Bot{
     BotInstance.app.get("/",function(req,res){
        res.render("login");
     });
-    
-    
+
+
     BotInstance.app.post("/connect",function(req,res){
       let username = req.body.username;
       if(!BotInstance.discussions.has(username)){

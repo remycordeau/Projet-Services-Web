@@ -5,26 +5,26 @@ var serviceResponse;
 
 module.exports = {
 
-  newBot: function(botName,botPort,req,res){
+  newBot: function(username,botName,botPort,req,res){
     request = new XMLHttpRequest();
     if(request){
       request.open("POST",serviceURL+'/newBot/'+`${botName}`+'/on/'+`${botPort}`, true);
       request.onreadystatechange = handler;
       request.send(null);
-      res.render("create");
+      res.render("create",{username: username});
     }else{
       console.error("Error during XMLHttpRequest");
     }
   },
 
-  deleteBot: function(botName,req,res){
+  deleteBot: function(username,botName,req,res){
     request = new XMLHttpRequest();
     if(request){
       request.open('POST',serviceURL+'/delete/'+`${botName}`, true);
       request.onreadystatechange = handler;
       request.send(null);
       var botList = serviceResponse;
-      res.render("delete");
+      res.render("delete",{username: username});
     }else{
       console.error("Error during XMLHttpRequest");
     }

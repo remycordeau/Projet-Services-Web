@@ -30,27 +30,31 @@
 <% } %>
 </div>
 <div class="pt-5 text-center">
-<form action = "/create" method = "get">
+<form action = "/create" method = "post">
   <input type = "submit" class="btn btn-info btn-lg" value = "Create a bot">
+  <input type="hidden" id="username" name="username" value = "<%= username %>">
 </form>
 </div>
 <div class="pt-5 text-center">
-<form action = "/deleteBot" method = "get">
+<form action = "/deleteBot" method = "post">
   <input type = "submit" class="btn btn-info btn-lg" value = "Delete a bot">
+  <input type="hidden" id="username" name="username" value = "<%= username %>">
 </form>
 </div>
 <div class="pt-5 text-center">
-<form action = "/info" method = "get">
+<form action = "/info" method = "post">
   <input type = "submit" class="btn btn-info btn-lg" id = "name" value = "Get information about a bot">
+  <input type="hidden" id="username" name="username" value = "<%= username %>">
 </form>
 </div>
 <div class="pt-5 text-center">
 <form action = "/ModifyBot" method = "post">
   <input type = "submit" class="btn btn-info btn-lg" id = "name" value = "Modify bot personnality">
+  <input type="hidden" id="username" name="username" value = "<%= username %>">
 </form>
 </div>
 <div class="pt-5 text-center"> <!-- Disconnect button that redirects to login page -->
-<form action = "/disconnect" method "post">
+<form action = "/disconnect" method "get">
   <input type ="submit" class="btn btn-danger btn-lg" value = "Disconnect">
 </form>
 </div>

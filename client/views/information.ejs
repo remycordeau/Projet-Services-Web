@@ -17,12 +17,14 @@
 <input type="text" id="name" name="name" required>
 <div class = "pt-2 text-center">
 <input type = "submit" class=" pt-2 btn btn-success btn-lg" value="Search bot">
+<input type="hidden" id="username" name="username" value = "<%= username %>">
 </div>
 </form>
 </div>
 <div class = "pt-5 text-center">
 <form action = "/AdminPage" method = "post">
 <input type = "submit" class=" pt-2 btn btn-warning btn-lg" value="Back to Bot Administration Menu">
+<input type="hidden" id="username" name="username" value = "<%= username %>">
 </form>
 </div>
 </body>
