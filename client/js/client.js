@@ -90,6 +90,23 @@ module.exports = {
     }else{
         console.error("Error during XMLHttpRequest");
     }
+  },
+
+  setBotStatusUp: function(username,botName,req,res){
+    request = new XMLHttpRequest();
+    if(request){
+        request.open('POST', serviceURL+'/'+`${botName}`+"/status/up", true);
+        request.onreadystatechange = function() {
+	           if(request.readyState == 4 && request.status == 200){
+		          serviceResponse = JSON.parse(request.responseText);
+		          //console.log(serviceResponse);
+              responseBotInfo(username,serviceResponse,req,res);
+	          }
+        };
+       request.send(null);
+    }else{
+        console.error("Error during XMLHttpRequest");
+    }
   }
 };
 

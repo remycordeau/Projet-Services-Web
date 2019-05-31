@@ -71,3 +71,9 @@ app.post('/:botName/status/down',cors(corsOptions),function(req,res){
     bot.setStatusDown(bot);
     res.send({botName: req.params.botName, port: bot.getPort(),status: bot.getStatus()});
 });
+
+app.post('/:botName/status/up',cors(corsOptions),function(req,res){
+    let bot = bots.getBot(req.params.botName);
+    bot.setStatusUp(bot);
+    res.send({botName: req.params.botName, port: bot.getPort(),status: bot.getStatus()});
+});

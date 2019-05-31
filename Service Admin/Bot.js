@@ -65,13 +65,25 @@ class Bot{
   // close the server and sets the bot status to down
   setStatusDown(BotInstance){
     let status = BotInstance.getStatus();
-    console.log("Before closing port, status is : "+status);
     BotInstance.getServer().close();
-    console.log("Bot is not running on port"+BotInstance.getPort()+" anymore");
-    this.status = "Down";
+    console.log("Bot is not running on port "+BotInstance.getPort()+" anymore");
+    BotInstance.setStatus("Down");
   }
 
-//GETTERS
+  setStatusUp(BotInstance){
+    let status = BotInstance.getStatus();
+    BotInstance.server = BotInstance.app.listen(BotInstance.port, () => {
+      console.log(`Bot is running again on port ${BotInstance.port}`);
+    });;
+    BotInstance.setStatus("Active");
+  }
+
+//GETTERS and SETTERS
+
+  setStatus(status){
+    this.status = status;
+  }
+
   getPort(){
     return this.port;
   }

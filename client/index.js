@@ -67,3 +67,9 @@ app.post("/statusDown",function(req,res){
   botName = req.body.botName;
   client.setBotStatusDown(username,botName,req,res);
 });
+
+app.post("/statusUp",function(req,res){
+  username = req.body.username;
+  botName = req.body.botName;
+  client.setBotStatusUp(username,botName,req,res);
+});
