@@ -59,8 +59,8 @@ app.post("/delete/:botName",cors(corsOptions),function(req,res){
 app.get('/:botName',cors(corsOptions),function(req,res){
   if(bots.getBotList().has(req.params.botName)){ // if bot exists
     let bot = bots.getBot(req.params.botName);
-    res.send({botName: req.params.botName, port: bot.getPort()});
+    res.send({Error: "",botName: req.params.botName, port: bot.getPort()});
   }else{
-    res.send({Error : "Bot doesn\'t exist"});
+    res.send({Error : "Specified bot doesn't exist"});
   }
 });

@@ -12,7 +12,7 @@ module.exports = {
       request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
           serviceResponse = JSON.parse(request.responseText);
-          handlerErr("create",username,serviceResponse,req,res);
+          ErrorHandler("create",username,serviceResponse,req,res);
         }
       }
       request.send(null);
@@ -28,7 +28,7 @@ module.exports = {
       request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
           serviceResponse = JSON.parse(request.responseText);
-          handlerErr("delete",username,serviceResponse,req,res);
+          ErrorHandler("delete",username,serviceResponse,req,res);
         }
       };
       request.send(null);
@@ -46,9 +46,7 @@ module.exports = {
 		        serviceResponse = JSON.parse(request.responseText);
 		        //console.log(serviceResponse);
 		        responseAllBots(username,serviceResponse,req,res);
-	      }else{
-     	      console.error("request Errors Occured " + request.readyState + " and the status is " + request.status);
-        }
+	      }
      };
      request.send(null);
    }else{
@@ -64,10 +62,12 @@ module.exports = {
 	           if(request.readyState == 4 && request.status == 200){
 		          serviceResponse = JSON.parse(request.responseText);
 		          //console.log(serviceResponse);
-		          responseBotInfo(username,serviceResponse,req,res);
-	          }else{
-              console.error("request Errors Occured " + request.readyState + " and the status is " + request.status);
-            }
+              if(serviceResponse.Error != ""){
+                ErrorHandler("information",username,serviceResponse,req,res);
+              }else {
+                responseBotInfo(username,serviceResponse,req,res);
+              }
+	          }
         };
        request.send(null);
     }else{
@@ -80,13 +80,12 @@ function responseAllBots(username,serviceResponse,req,res){
   res.render('Administration',{username: username,botList: serviceResponse});
 }
 
-
 function responseBotInfo(username,serviceResponse,req,res){
   res.render('botInfo',{username: username,botInfo: serviceResponse});
 }
 
-function handlerErr(pageToRender,username,serviceResponse,req,res){
-  if(serviceResponse.Error != ""){ // deal with error when creating a new bot
+function ErrorHandler(pageToRender,username,serviceResponse,req,res){
+  if(serviceResponse.Error != ""){
     res.render("error",{message: serviceResponse.Error, username: username});
   }else{
     res.render(pageToRender,{username: username})
