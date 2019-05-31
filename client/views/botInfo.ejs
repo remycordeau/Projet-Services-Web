@@ -8,18 +8,41 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 <title>Bot information</title>
 </head>
+<script type="text/javascript">
+  checkStatus = function(){
+    if(botInfo.status == "Down"){
+      alert("Bot is already shut down !");
+      return false;
+    }
+    return true;
+  }
+</script>
 <body>
 <h1 class="text-center text-success">Information about bot <%= botInfo.botName %></h1>
 <div class= "pt-5 text-center">
 <h2>Name : <%= botInfo.botName %></h2>
 <h2>Running on port : <%= botInfo.port %></h2>
-<h2>Status : </h2>
+<div>
+  <h2 style="display:inline;">Status : </h2>
+<% if(botInfo.status == "Active"){ %>
+  <h2 class = "text-success" style="display:inline;"><%= botInfo.status %></h2>
+<% }else{ %>
+  <h2 class = "text-danger" style="display:inline;"><%= botInfo.status %></h2>
+<% } %>
+</div>
 <h2>Brain : </h2>
 </div>
 <div class = "pt-5 text-center">
+  <form onsubmit="return checkStatus()" action = "/statusDown" method = "post">
+    <input type = "submit" class=" pt-2 btn btn-warning btn-lg" value="Shut down bot">
+    <input type="hidden" id="username" name="username" value = "<%= username %>">
+    <input type="hidden" id="botName" name="botName" value = "<%= botInfo.botName %>">
+  </form>
+</div>
+<div class = "pt-5 text-center">
 <form action = "/AdminPage" method = "post">
-<input type = "submit" class=" pt-2 btn btn-warning btn-lg" value="Back to Bot Administration Menu">
-<input type="hidden" id="username" name="username" value = "<%= username %>">
+  <input type = "submit" class=" pt-2 btn btn-warning btn-lg" value="Back to Bot Administration Menu">
+  <input type="hidden" id="username" name="username" value = "<%= username %>">
 </form>
 </div>
 </body>

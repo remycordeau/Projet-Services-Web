@@ -60,3 +60,10 @@ app.post("/botInfo",function(req,res){
   username = req.body.username;
   client.getBot(username,req.body.name,req,res);
 });
+
+//set status down
+app.post("/statusDown",function(req,res){
+  username = req.body.username;
+  botName = req.body.botName;
+  client.setBotStatusDown(username,botName,req,res);
+});

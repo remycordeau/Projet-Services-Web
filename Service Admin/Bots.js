@@ -3,7 +3,7 @@ const Bot = require("./Bot.js");
 class Bots{
 
   constructor(){
-  this.bots = new Map();
+    this.bots = new Map();
   }
 
   get size(){
@@ -39,18 +39,26 @@ class Bots{
   getAllBots(){
 
     let tabBots = [];
-    for (const v of this.bots.values()) {
-      tabBots.push(v);
+    for (const bot of this.bots.values()) {
+      tabBots.push(bot);
     }
     return tabBots;
   }
 
   getAllPorts(){
     let allPorts = [];
-    for (const v of this.bots.values()) {
-      allPorts.push(v.getPort());
+    for (const bot of this.bots.values()) {
+      allPorts.push(bot.getPort());
     }
     return allPorts;
+  }
+
+  getAllStatuses(){
+    let allStatuses = [];
+    for (const bot of this.bots.values()) {
+      allStatuses.push(bot.getStatus());
+    }
+    return allStatuses;
   }
 
   deleteBots(){

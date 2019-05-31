@@ -25,7 +25,8 @@ const server = app.listen(8081, () => { //run server
 
 app.get("/",cors(corsOptions),function(req,res){
   let allPorts = bots.getAllPorts();
-  res.send({botNames: [...bots.getBotList().keys()],ports: allPorts}); //parsing map into array to allow it to be send as a json
+  let allStatuses = bots.getAllStatuses();
+  res.send({botNames: [...bots.getBotList().keys()],ports: allPorts,statuses: allStatuses}); //parsing map into array to allow it to be send as a json
 });
 
 app.post("/newBot/:botName/on/:botPort",cors(corsOptions),function(req,res){
@@ -59,8 +60,14 @@ app.post("/delete/:botName",cors(corsOptions),function(req,res){
 app.get('/:botName',cors(corsOptions),function(req,res){
   if(bots.getBotList().has(req.params.botName)){ // if bot exists
     let bot = bots.getBot(req.params.botName);
-    res.send({Error: "",botName: req.params.botName, port: bot.getPort()});
+    res.send({Error: "",botName: req.params.botName, port: bot.getPort(),status: bot.getStatus()});
   }else{
     res.send({Error : "Specified bot doesn't exist"});
   }
+});
+
+app.post('/:botName/status/down',cors(corsOptions),function(req,res){
+    let bot = bots.getBot(req.params.botName);
+    bot.setStatusDown(bot);
+    res.send({botName: req.params.botName, port: bot.getPort(),status: bot.getStatus()});
 });
