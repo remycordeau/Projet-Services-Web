@@ -12,7 +12,7 @@ module.exports = {
       request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
           serviceResponse = JSON.parse(request.responseText);
-          handlerErr(username,serviceResponse,req,res);
+          handlerErr("create",username,serviceResponse,req,res);
         }
       }
       request.send(null);
@@ -25,10 +25,13 @@ module.exports = {
     request = new XMLHttpRequest();
     if(request){
       request.open('POST',serviceURL+'/delete/'+`${botName}`, true);
-      request.onreadystatechange = handler;
+      request.onreadystatechange = function(){
+        if(request.readyState == 4 && request.status == 200){
+          serviceResponse = JSON.parse(request.responseText);
+          handlerErr("delete",username,serviceResponse,req,res);
+        }
+      };
       request.send(null);
-      var botList = serviceResponse;
-      res.render("delete",{username: username});
     }else{
       console.error("Error during XMLHttpRequest");
     }
@@ -82,10 +85,10 @@ function responseBotInfo(username,serviceResponse,req,res){
   res.render('botInfo',{username: username,botInfo: serviceResponse});
 }
 
-function handlerErr(username,serviceResponse,req,res){
-            if(serviceResponse.Error != ""){ // deal with error when creating a new bot
-              res.render("error",{message: serviceResponse.Error, username: username});
-            }else{
-              res.render("create",{username: username})
-            }
+function handlerErr(pageToRender,username,serviceResponse,req,res){
+  if(serviceResponse.Error != ""){ // deal with error when creating a new bot
+    res.render("error",{message: serviceResponse.Error, username: username});
+  }else{
+    res.render(pageToRender,{username: username})
+  }
 }

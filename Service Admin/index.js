@@ -36,22 +36,24 @@ app.post("/newBot/:botName/on/:botPort",cors(corsOptions),function(req,res){
 
   if(bots.getBotList().has(req.params.botName) && portIsAlreadyTaken){
    error = "Bot already exists and specified port is already in use !";
- }else if(portIsAlreadyTaken){
+  }else if(portIsAlreadyTaken){
    error = "Specified port is already in use !";
- }else if(bots.getBotList().has(req.params.botName)) {
+  }else if(bots.getBotList().has(req.params.botName)) {
    error = "Bot already exists !";
- } else { //no mistakes made by user
-  bots.addBot(req.params.botName,req.params.botPort);
+  }else{ //no mistakes made by user
+   bots.addBot(req.params.botName,req.params.botPort);
  }
  res.send({Error: error});
 });
 
 app.post("/delete/:botName",cors(corsOptions),function(req,res){
+  let error = "";
   if(bots.getBotList().has(req.params.botName)){
     bots.deleteBot(req.params.botName);
-  } else{
-    res.send({Error : "Bot doesn\'t exist"});
+  }else{
+    error = "Specified bot doesn't exist";
   }
+  res.send({Error: error});
 });
 
 app.get('/:botName',cors(corsOptions),function(req,res){
