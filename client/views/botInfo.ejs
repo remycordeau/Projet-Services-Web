@@ -21,7 +21,7 @@
   <h2 class = "text-danger" style="display:inline;"><%= botInfo.status %></h2>
 <% } %>
 </div>
-<h2>Brain : </h2>
+<h2>Brain : <%= botInfo.brain %></h2>
 </div>
 <div class = "pt-5 text-center">
 <% if(botInfo.status == "Active"){ %>
@@ -37,6 +37,13 @@
     <input type="hidden" id="botName" name="botName" value = "<%= botInfo.botName %>">
   </form>
 <% } %>
+</div>
+<div class = "pt-5 text-center">
+  <form action = "/newBrain" method = "post">
+    <input type = "submit" class=" pt-2 btn btn-primary btn-lg" value="Change bot brain">
+    <input type="hidden" id="username" name="username" value = "<%= username %>">
+    <input type="hidden" id="botName" name="botName" value = "<%= botInfo.botName %>">
+  </form>
 </div>
 <div class = "pt-5 text-center">
 <form action = "/AdminPage" method = "post">

@@ -61,6 +61,14 @@ class Bots{
     return allStatuses;
   }
 
+  getAllBrains(){
+    let allBrains = [];
+    for(const bot of this.bots.values()){
+      allBrains.push(bot.getBrain());
+    }
+    return allBrains;
+  }
+
   deleteBots(){
     this.bots.clear();
   }

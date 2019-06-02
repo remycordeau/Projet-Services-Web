@@ -8,7 +8,7 @@ module.exports = {
   newBot: function(username,botName,botPort,req,res){
     request = new XMLHttpRequest();
     if(request){
-      request.open("POST",serviceURL+'/newBot/'+`${botName}`+'/on/'+`${botPort}`, true);
+      request.open("PUT",serviceURL+'/newBot/'+`${botName}`+'/on/'+`${botPort}`, true);
       request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
           serviceResponse = JSON.parse(request.responseText);
@@ -24,7 +24,7 @@ module.exports = {
   deleteBot: function(username,botName,req,res){
     request = new XMLHttpRequest();
     if(request){
-      request.open('POST',serviceURL+'/delete/'+`${botName}`, true);
+      request.open('DELETE',serviceURL+'/delete/'+`${botName}`, true);
       request.onreadystatechange = function(){
         if(request.readyState == 4 && request.status == 200){
           serviceResponse = JSON.parse(request.responseText);
@@ -104,6 +104,23 @@ module.exports = {
 	          }
         };
        request.send(null);
+    }else{
+        console.error("Error during XMLHttpRequest");
+    }
+  },
+
+  changeBrain: function(username,botName,brainName,req,res){
+    request = new XMLHttpRequest();
+    if(request){
+        request.open('POST',serviceURL+'/'+`${botName}`+"/changeBrain/"+`${brainName}`);
+        request.onreadystatechange = function(){
+          if(request.readyState == 4 && request.status == 200){
+           serviceResponse = JSON.parse(request.responseText);
+           //console.log(serviceResponse);
+           responseBotInfo(username,serviceResponse,req,res);
+        }
+      }
+      request.send(null);
     }else{
         console.error("Error during XMLHttpRequest");
     }

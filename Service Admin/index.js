@@ -23,13 +23,16 @@ const server = app.listen(8081, () => { //run server
 
 ////////////////////////////ROUTES////////////////////////////////
 
+// get bot list
 app.get("/",cors(corsOptions),function(req,res){
   let allPorts = bots.getAllPorts();
   let allStatuses = bots.getAllStatuses();
-  res.send({botNames: [...bots.getBotList().keys()],ports: allPorts,statuses: allStatuses}); //parsing map into array to allow it to be send as a json
+  let allBrains = bots.getAllBrains();
+  res.send({botNames: [...bots.getBotList().keys()],ports: allPorts,statuses: allStatuses,brains: allBrains}); //parsing map into array to allow it to be send as a json
 });
 
-app.post("/newBot/:botName/on/:botPort",cors(corsOptions),function(req,res){
+// create new bot
+app.put("/newBot/:botName/on/:botPort",cors(corsOptions),function(req,res){
 
   let allPorts = bots.getAllPorts();
   let portIsAlreadyTaken = allPorts.includes(req.params.botPort);
@@ -47,7 +50,8 @@ app.post("/newBot/:botName/on/:botPort",cors(corsOptions),function(req,res){
  res.send({Error: error});
 });
 
-app.post("/delete/:botName",cors(corsOptions),function(req,res){
+// delete existing bot
+app.delete("/delete/:botName",cors(corsOptions),function(req,res){
   let error = "";
   if(bots.getBotList().has(req.params.botName)){
     bots.deleteBot(req.params.botName);
@@ -57,23 +61,33 @@ app.post("/delete/:botName",cors(corsOptions),function(req,res){
   res.send({Error: error});
 });
 
+// get specified bot
 app.get('/:botName',cors(corsOptions),function(req,res){
   if(bots.getBotList().has(req.params.botName)){ // if bot exists
     let bot = bots.getBot(req.params.botName);
-    res.send({Error: "",botName: req.params.botName, port: bot.getPort(),status: bot.getStatus()});
+    res.send({Error: "",botName: req.params.botName, port: bot.getPort(),status: bot.getStatus(),brain: bot.getBrain()});
   }else{
     res.send({Error : "Specified bot doesn't exist"});
   }
 });
 
+// set specified bot status to down
 app.post('/:botName/status/down',cors(corsOptions),function(req,res){
     let bot = bots.getBot(req.params.botName);
     bot.setStatusDown(bot);
-    res.send({botName: req.params.botName, port: bot.getPort(),status: bot.getStatus()});
+    res.send({botName: req.params.botName, port: bot.getPort(),status: bot.getStatus(),brain: bot.getBrain()});
 });
 
+// set specified bot status to active
 app.post('/:botName/status/up',cors(corsOptions),function(req,res){
     let bot = bots.getBot(req.params.botName);
     bot.setStatusUp(bot);
-    res.send({botName: req.params.botName, port: bot.getPort(),status: bot.getStatus()});
+    res.send({botName: req.params.botName, port: bot.getPort(),status: bot.getStatus(),brain: bot.getBrain()});
+});
+
+// change brain of specified bot
+app.post('/:botName/changeBrain/:brainName',function(req,res){
+  let bot = bots.getBot(req.params.botName);
+  bot.setBrain(bot,req.params.brainName);
+  res.send({botName: req.params.botName, port: bot.getPort(),status: bot.getStatus(),brain: bot.getBrain()});
 });

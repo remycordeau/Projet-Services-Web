@@ -68,8 +68,17 @@ app.post("/statusDown",function(req,res){
   client.setBotStatusDown(username,botName,req,res);
 });
 
+//set status up
 app.post("/statusUp",function(req,res){
   username = req.body.username;
   botName = req.body.botName;
   client.setBotStatusUp(username,botName,req,res);
+});
+
+//change bot brain
+app.post("/newBrain",function(req,res){
+  username = req.body.username;
+  botName = req.body.botName;
+  brainName = req.body.brainName;
+  client.changeBrain(username,botName,brainName,req,res);
 });

@@ -5,11 +5,12 @@ class Bot{
     const express = require("express");
     const RiveScript = require("rivescript");
     this.bot = new RiveScript();
+    this.brain = "standard";
     this.port = port;
     this.app = express();
     this.reply = "";
     this.status = "Down";
-    this.bot.loadDirectory("brain").then(this.initService.bind(this)).catch(this.error_handler);
+    this.bot.loadFile("brain/"+this.brain+".rive").then(this.initService.bind(this)).catch(this.error_handler);
     this.discussions = new Map();
   }
 
@@ -47,6 +48,10 @@ class Bot{
     });
 }
 
+  success_handler(){
+    console.log("new brain successfully loaded");
+  }
+
   error_handler (loadcount, err) {
   	console.log("Error loading batch #" + loadcount + ": " + err + "\n");
   }
@@ -70,6 +75,7 @@ class Bot{
     BotInstance.setStatus("Down");
   }
 
+  // starts the server and sets the bot status to active
   setStatusUp(BotInstance){
     let status = BotInstance.getStatus();
     BotInstance.server = BotInstance.app.listen(BotInstance.port, () => {
@@ -78,7 +84,22 @@ class Bot{
     BotInstance.setStatus("Active");
   }
 
+ //changes the bot's brain and loads it
+  changeBrain(BotInstance,newBrain){
+    console.log("changing old brain that was : "+BotInstance.getBrain());
+    BotInstance.setBrain(newBrain);
+    BotInstance.getBot().loadFile("brain/"+BotInstance.getBrain()+".rive").then(success_handler).catch(error_handler);
+  }
+
 //GETTERS and SETTERS
+
+  getBrain(){
+    return this.brain;
+  }
+
+  setBrain(newBrain){
+    this.brain = newBrain;
+  }
 
   setStatus(status){
     this.status = status;

@@ -15,13 +15,14 @@
   if(botList.botNames[0] != undefined){
   %>
 <table class="table table-striped table-light" border = "1">
-    <tr class = thead-dark><th>Bot name</th><th>Running on port</th><th>Status</th></tr>
+    <tr class = thead-dark><th>Bot name</th><th>Running on port</th><th>Brain</th><th>Status</th></tr>
       <%
         for(let i = 0; i < botList.botNames.length; i++){
       %>
       <tr>
         <td><%= botList.botNames[i] %></td>
         <td><%= botList.ports[i] %></td>
+        <td><%= botList.brains[i] %></td>
         <% if(botList.statuses[i] == "Active"){ %>
           <td class = "text-success"><%= botList.statuses[i] %></td>
         <% }else{ %>
