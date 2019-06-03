@@ -46,11 +46,11 @@ class Bot{
     BotInstance.app.post("/talk",function(req,res){
       BotInstance.getReply(BotInstance,BotInstance.bot,BotInstance.port,req,res);
     });
-}
 
-  success_handler(){
-    console.log("new brain successfully loaded");
-  }
+    BotInstance.app.get("/disconnect",function(req,res){
+      res.render("login");
+    });
+}
 
   error_handler (loadcount, err) {
   	console.log("Error loading batch #" + loadcount + ": " + err + "\n");
@@ -86,9 +86,12 @@ class Bot{
 
  //changes the bot's brain and loads it
   changeBrain(BotInstance,newBrain){
+    BotInstance.getServer().close();
     console.log("changing old brain that was : "+BotInstance.getBrain());
     BotInstance.setBrain(newBrain);
-    BotInstance.getBot().loadFile("brain/"+BotInstance.getBrain()+".rive").then(success_handler).catch(error_handler);
+    const RiveScript = require("rivescript");
+    BotInstance.bot = new RiveScript();
+    BotInstance.bot.loadFile("brain/"+BotInstance.getBrain()+".rive").then(BotInstance.initService.bind(BotInstance)).catch(BotInstance.error_handler);
   }
 
 //GETTERS and SETTERS

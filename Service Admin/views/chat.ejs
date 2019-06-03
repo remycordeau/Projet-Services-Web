@@ -11,14 +11,14 @@
 <body>
 <h1 class="text-center text-success">Connected to Bot on port <%= bot.getPort()%> </h1>
 <div class="text-center pt-5">
-<% 
+<%
   let discussion = bot.getDiscussion(username);
-   
-  for (i = 0; i < discussion.length; i++) { 
-      if (i%2==0){ 
+
+  for (i = 0; i < discussion.length; i++) {
+      if (i%2==0){
       %>
       	<div><p> <%= username + " : " + discussion[i] %></p></div>
- 	  <% 
+ 	  <%
  	  } else { %>
       	<div><p> bot : <%= discussion[i] %></p></div>
    	  <% }
@@ -33,5 +33,10 @@
 <input type = "submit" class=" pt-2 btn btn-success btn-lg" value = "Submit message to bot">
 </div>
 </form>
+<div class="pt-5 text-center"> <!-- Disconnect button that redirects to login page -->
+<form action = "/disconnect" method "get">
+  <input type ="submit" class="btn btn-danger btn-lg" value = "Disconnect">
+</form>
+</div>
 </body>
 </html>

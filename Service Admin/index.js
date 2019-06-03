@@ -10,7 +10,7 @@ var bots = new Bots();
 app.set('views', __dirname + '/../views');
 app.use(bodyParser.urlencoded({ extended: true })); // to use bodyParser
 app.use(cors());
-  var corsOptions = {
+var corsOptions = {
   origin: 'http://localhost:3000',
   methods: 'GET,POST,PUT,DELETE',
   optionsSuccessStatus: 200
@@ -88,6 +88,6 @@ app.post('/:botName/status/up',cors(corsOptions),function(req,res){
 // change brain of specified bot
 app.post('/:botName/changeBrain/:brainName',function(req,res){
   let bot = bots.getBot(req.params.botName);
-  bot.setBrain(bot,req.params.brainName);
+  bot.changeBrain(bot,req.params.brainName);
   res.send({botName: req.params.botName, port: bot.getPort(),status: bot.getStatus(),brain: bot.getBrain()});
 });

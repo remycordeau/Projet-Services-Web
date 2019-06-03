@@ -79,6 +79,6 @@ app.post("/statusUp",function(req,res){
 app.post("/newBrain",function(req,res){
   username = req.body.username;
   botName = req.body.botName;
-  brainName = req.body.brainName;
-  client.changeBrain(username,botName,brainName,req,res);
+  botBrain = req.body.botBrain;
+  client.changeBrain(username,botName,botBrain,req,res);
 });

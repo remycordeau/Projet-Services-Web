@@ -9,6 +9,13 @@
 <title>Bot information</title>
 </head>
 <body>
+<script>
+  function setNewBrain(){
+    var brain = document.getElementById("selectBrains").value;
+    var hidden = document.getElementById("botBrain");
+    hidden.value = brain;
+  }
+</script>
 <h1 class="text-center text-success">Information about bot <%= botInfo.botName %></h1>
 <div class= "pt-5 text-center">
 <h2>Name : <%= botInfo.botName %></h2>
@@ -40,10 +47,18 @@
 </div>
 <div class = "pt-5 text-center">
   <form action = "/newBrain" method = "post">
+    <select class="browser-default custom-select" id="selectBrains" onchange="setNewBrain();">
+      <option value="" disabled selected>Choose brain</option>
+      <option value="standard">standard</option>
+      <option value="custom">custom</option>
+    </select>
+  <div class="pt-2">
     <input type = "submit" class=" pt-2 btn btn-primary btn-lg" value="Change bot brain">
+    <input type = "hidden" id="botBrain" name="botBrain" value="document.getElementById("selectBrains").value;">
     <input type="hidden" id="username" name="username" value = "<%= username %>">
     <input type="hidden" id="botName" name="botName" value = "<%= botInfo.botName %>">
   </form>
+</div>
 </div>
 <div class = "pt-5 text-center">
 <form action = "/AdminPage" method = "post">
