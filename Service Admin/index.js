@@ -54,6 +54,8 @@ app.put("/newBot/:botName/on/:botPort",cors(corsOptions),function(req,res){
 app.delete("/delete/:botName",cors(corsOptions),function(req,res){
   let error = "";
   if(bots.getBotList().has(req.params.botName)){
+    let bot = bots.getBot(req.params.botName);
+    bot.setStatusDown(bot);
     bots.deleteBot(req.params.botName);
   }else{
     error = "Specified bot doesn't exist";

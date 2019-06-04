@@ -30,9 +30,6 @@ class Bots{
     let bot = this.bots.get(name);
     if(bot != null){
         this.bots.delete(name);
-      return name;
-    } else {
-      return null;
     }
   }
 
